@@ -39,7 +39,7 @@ let titles = [
 // Your final submission should have much more data than this, and
 // you should use more than just an array of strings to store it all.
 
-// This function adds cards the page to display the data in the array
+
 function showCards() {
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
@@ -95,3 +95,60 @@ function removeLastCard() {
   titles.pop(); // Remove last item in titles array
   showCards(); // Call showCards again to refresh
 }
+
+
+
+//============================================================================================================
+//============================================================================================================
+//============================================================================================================
+// ALL CODE ABOVE THIS WILL BE EDITED OR REMOVED -- CAME WITH THE FILE TEMPLATE 
+
+
+
+// TODO: create a tree of pets for O(log(n)) search speed --  need to implement search bar & feature 
+//       maybe save data as a hash table for O(1) lookup time, but idk what to put as the key??
+const pets = [];
+
+function loadXMLData() {
+  fetch("pets.xml")
+    .then(response => response.text())
+    .then((xmlFile) => {
+
+      // Turn the XML into a DOM object - can work with info now :D
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(xmlFile, "applications/xml");
+
+      const xmlRowData = xmlDoc.getElementsByTagName("row");
+
+      for(let i = 0; i < xmlRowData.length; i++) {
+        let currentRow = xmlRowData[i];
+        let newPet = {
+          petName    : currentRow.getElementByTagName("petname")[0].textContent,
+          animalType : currentRow.getElementByTagname("animaltype")[0].textContent, 
+          petAge     : currentRow.getElementByTagName("petage")[0].textContent, 
+          petColor   : currentRow.getELementByTagName("color")[0].textContent, 
+          petBreed   : currentRow.getELementByTagName("breed")[0].textContent, 
+          petGender  : currentRow.getELementByTagName("sex")[0].textContent,      //maybe include a conditinal operator to just assign male or female since XML also stores whether or not the pet is spayed/neutered    
+          petPicture : currentRow.getELementByTagName("url")[0].getAttribute()
+        };
+        // will change this to a different data struct  
+        pets.push(newPet);
+      }
+    }).catch((error) =>{
+      console.error("Could not load data")
+    })
+
+    console.log(pets[1].petName);
+}
+
+
+
+console.log(pets);
+
+
+
+
+
+
+// This function adds cards the page to display the data in the array
+

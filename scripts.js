@@ -23,24 +23,6 @@
  *
  */
 
-const FRESH_PRINCE_URL =
-  "https://upload.wikimedia.org/wikipedia/en/3/33/Fresh_Prince_S1_DVD.jpg";
-const CURB_POSTER_URL =
-  "https://m.media-amazon.com/images/M/MV5BZDY1ZGM4OGItMWMyNS00MDAyLWE2Y2MtZTFhMTU0MGI5ZDFlXkEyXkFqcGdeQXVyMDc5ODIzMw@@._V1_FMjpg_UX1000_.jpg";
-const EAST_LOS_HIGH_POSTER_URL =
-  "https://static.wikia.nocookie.net/hulu/images/6/64/East_Los_High.jpg";
-
-// This is an array of strings (TV show titles)
-let titles = [
-  "Fresh Prince of Bel Air",
-  "Curb Your Enthusiasm",
-  "East Los High",
-];
-// Your final submission should have much more data than this, and
-// you should use more than just an array of strings to store it all.
-
-
-
 // This calls the addCards() function when the page is first loaded
 document.addEventListener("DOMContentLoaded", extractDataFromCSV);
 
@@ -50,13 +32,6 @@ function quoteAlert() {
     "I guess I can kiss heaven goodbye, because it got to be a sin to look this good!"
   );
 }
-
-function removeLastCard() {
-  titles.pop(); // Remove last item in titles array
-  showCards(); // Call showCards again to refresh
-}
-
-
 
 //============================================================================================================
 //============================================================================================================
@@ -88,7 +63,7 @@ function extractDataFromCSV() {
         const petObject = {};
 
         for(let j = 0; j < petValues.length; j++) {
-          petObject[csvHeaders[j]] = petValues[j];
+          petObject[csvHeaders[j]] = petValues[j]; // since header and petValues are parallel, can use one index to loop through both
         }
         pets.push(petObject);
       }
@@ -100,13 +75,13 @@ function extractDataFromCSV() {
 }
 
 
-function editCardContent(card, newImageURL, petObject) {
+function editCardContent(card, petObject) {
 
   card.style.display = "block";
 
   const cardHeader = card.querySelector("h2");
-  console.log(petObject.petName);
-  cardHeader.textContent = petObject.petName;
+  //console.log(petObject.petName);
+  cardHeader.textContent = petObject.petName.replace("*", "");
 
   const cardImage = card.querySelector("img");
   cardImage.src = petObject.petImage;
@@ -115,11 +90,12 @@ function editCardContent(card, newImageURL, petObject) {
   const cardUnorderedList = card.querySelector("ul");
   const cardListElements = cardUnorderedList.querySelectorAll("li");
 
-  console.log(petObject.petAge);
-  //hard coding this because easier than to loop through a list of 2 elements
-  cardListElements[0].textContent = petObject.petAge;  
-  cardListElements[1].textContent = petObject.breed;
+  //console.log(petObject.petAge);
   
+  //hard coding this because easier than to loop through a list of 2 elements
+  //change this to a loop if need more list elements inside the card, but realistically just have the card redirect to a page holding more information about the pet itself
+  cardListElements[0].textContent = "Age: " + petObject.petAge;  
+  cardListElements[1].textContent = "Breed: " + petObject.breed;
 }
 
 function showCards() {
@@ -131,9 +107,12 @@ function showCards() {
   for(let i = 0; i < pets.length; i++) {
     let currentPet = pets[i];
 
-    let imageURL = currentPet.imageURL;
     const card = template.cloneNode(true);
-    editCardContent(card, imageURL, currentPet);
+    editCardContent(card, currentPet);
     cardContainer.appendChild(card);
   }
+}
+function removeLastCard() {
+  pets.pop();  //removes the last thing in the array
+  showCards(); //reload page - updates UI
 }

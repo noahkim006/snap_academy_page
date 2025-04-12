@@ -109,15 +109,16 @@ function editCardContent(card, newImageURL, petObject) {
   cardHeader.textContent = petObject.petName;
 
   const cardImage = card.querySelector("img");
-  cardImage.src = newImageURL;
+  cardImage.src = petObject.petImage;
   cardImage.alt = "Picture of " + petObject.petName + " the " + petObject.animalType;
 
   const cardUnorderedList = card.querySelector("ul");
   const cardListElements = cardUnorderedList.querySelectorAll("li");
 
   console.log(petObject.petAge);
-  cardListElements[0].textContent = String(petObject.petAge);
-  cardListElements[1].textContent = String(petObject.breed);
+  //hard coding this because easier than to loop through a list of 2 elements
+  cardListElements[0].textContent = petObject.petAge;  
+  cardListElements[1].textContent = petObject.breed;
   
 }
 

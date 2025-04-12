@@ -18,18 +18,25 @@ body {
   color: white;
 }
 
+/* Style the card container to use Flexbox */
 #card-container {
   display: flex;
-  justify-content: center;
-  margin: 20px;
+  flex-wrap: wrap; /* Allow wrapping to the next row */
+  gap: 16px; /* Add spacing between cards */
+  justify-content: center; /* Center the cards horizontally */
+  padding: 16px; /* Add padding around the container */
 }
 
+/* Style individual cards */
 .card {
-  width: 300px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 5px;
+  flex: 1 1 calc(25% - 32px); /* Each card takes up 25% of the row minus spacing */
+  max-width: calc(25% - 32px); /* Ensure cards don't exceed 25% width */
+  box-sizing: border-box; /* Include padding and border in width/height */
+  background-color: #f9f9f9; /* Optional: Add a background color */
+  border: 1px solid #ddd; /* Optional: Add a border */
+  border-radius: 8px; /* Optional: Add rounded corners */
+  padding: 16px; /* Optional: Add padding inside the card */
+  text-align: center; /* Center-align card content */
 }
 
 .card-content {
@@ -46,6 +53,21 @@ body {
 .card img {
   width: 100%;
   height: auto;
+}
+
+/* Adjust card size for smaller screens */
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 calc(50% - 32px); /* Each card takes up 50% of the row on smaller screens */
+    max-width: calc(50% - 32px);
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    flex: 1 1 100%; /* Each card takes up the full width on very small screens */
+    max-width: 100%;
+  }
 }
 
 .footer {

@@ -97,29 +97,28 @@ function extractDataFromCSV() {
 
     })
     .catch(error => console.error("ERROR FETCHING FILE", error));
-
-
-    //this properly shows each element of pets but doig it alone doesnt ??  
-    // for(let i = 0; i < pets.length; i++) {
-    //   console.log(pets[i]);
-    // }
 }
 
 
-function editCardContent(card, newTitle, newImageURL) {
+function editCardContent(card, newImageURL, petObject) {
+
   card.style.display = "block";
 
   const cardHeader = card.querySelector("h2");
-  cardHeader.textContent = newTitle;
+  console.log(petObject.petName);
+  cardHeader.textContent = petObject.petName;
 
   const cardImage = card.querySelector("img");
   cardImage.src = newImageURL;
-  cardImage.alt = newTitle + " Poster";
+  cardImage.alt = "Picture of " + petObject.petName + " the " + petObject.animalType;
 
-  // You can use console.log to help you debug!
-  // View the output by right clicking on your website,
-  // select "Inspect", then click on the "Console" tab
-  console.log("new card:", newTitle, "- html: ", card);
+  const cardUnorderedList = card.querySelector("ul");
+  const cardListElements = cardUnorderedList.querySelectorAll("li");
+
+  console.log(petObject.petAge);
+  cardListElements[0].textContent = String(petObject.petAge);
+  cardListElements[1].textContent = String(petObject.breed);
+  
 }
 
 function showCards() {
@@ -133,30 +132,7 @@ function showCards() {
 
     let imageURL = currentPet.imageURL;
     const card = template.cloneNode(true);
-    editCardContent(card, currentPet.petName, imageURL);
+    editCardContent(card, imageURL, currentPet);
     cardContainer.appendChild(card);
   }
-
-
-  // const cardContainer = document.getElementById("card-container");
-  // cardContainer.innerHTML = "";
-  // const templateCard = document.querySelector(".card");
-
-  // for (let i = 0; i < titles.length; i++) {
-  //   let title = titles[i];
-
-  //   // This part of the code doesn't scale very well! After you add your
-  //   // own data, you'll need to do something totally different here.
-  //   let imageURL = "";
-  //   if (i == 0) {
-  //     imageURL = FRESH_PRINCE_URL;
-  //   } else if (i == 1) {
-  //     imageURL = CURB_POSTER_URL;
-  //   } else if (i == 2) {
-  //     imageURL = EAST_LOS_HIGH_POSTER_URL;
-  //   }
-
-  //   const nextCard = templateCard.cloneNode(true); // Copy the template card
-  //   editCardContent(nextCard, title, imageURL); // Edit title and image
-  //   cardContainer.appendChild(nextCard); // Add new card to the container
-  }
+}

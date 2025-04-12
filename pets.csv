@@ -1,4 +1,4 @@
-Animal ID,Intake Type,In Date,Pet name,Animal Type,Pet Age,Pet Size,Color,Breed,Sex,URL Link ,Crossing
+animalID,intakeType,inDate,petName,animalType,petAge,petSize,color,breed,petGender,petImage,crossing
 A529402,OWNER SUR,03/25/2025,*CHIMERA,CAT,3 YEARS,MED,BRN TABBY / WHITE,DOMESTIC SH,N,http://www.petharbor.com/get_image.asp?res=DETAIL&id=A529402&location=MONT,
 A529579,OWNER SUR,03/30/2025,*IAGO,BIRD,NO AGE,MED,GREEN,PARAKEET,F,http://www.petharbor.com/get_image.asp?res=DETAIL&id=A529579&location=MONT,
 A528183,OWNER SUR,03/31/2025,*FLOWER,OTHER,5 YEARS,MED,BROWN / WHITE,LIONHEAD,F,http://www.petharbor.com/get_image.asp?res=DETAIL&id=A528183&location=MONT,

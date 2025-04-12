@@ -34,9 +34,7 @@
 // TODO: create a tree of pets for O(log(n)) search speed --  need to implement search bar & feature 
 //       maybe save data as a hash table for O(1) lookup time, but idk what to put as the key??
 const pets = [];
-//const petTypeOptions = new Set();
 
-const mapOfPets = new Map();
 
 function test() {
   const reader = new FileReader();
@@ -85,6 +83,7 @@ function editCardContent(card, petObject) {
 
   card.style.display = "block";
 
+  card.value = petObject.petName;
   const cardHeader = card.querySelector("h2");
   //console.log(petObject.petName);
   cardHeader.textContent = petObject.petName.replace("*", "").replace(" ", ""); //get rid of unneccessary white spaces and asterisk that came with data in CSV
@@ -102,6 +101,7 @@ function editCardContent(card, petObject) {
   //change this to a loop if need more list elements inside the card, but realistically just have the card redirect to a page holding more information about the pet itself
   cardListElements[0].textContent = "Age: " + petObject.petAge;  
   cardListElements[1].textContent = "Breed: " + petObject.breed;
+  cardListElements[2].textContent = "In Date: " + petObject.inDate;
 }
 
 function showCards(petsList) {
@@ -123,20 +123,26 @@ function showCards(petsList) {
 function removeLastCard() {
 
   pets.pop();  //removes the last thing in the array
-  showCards(); //reload page - updates UI
+  showCards(pets); //reload page - updates UI
 }
 
 function sortByAnimalType(animalType) {
   
-  //console.log(animalType);
   const sortedPetsByType = [];
-  //console.log(pets);
+
   for(let i = 0; i < pets.length; i++) {
     let currentPet = pets[i];
     if(currentPet.animalType == animalType) {
       sortedPetsByType.push(currentPet);
     }
   }
-  //console.log(sortedPetsByType);
+
   showCards(sortedPetsByType);
+}
+
+function sortByInDate() {
+
+  const sortedByInDate= [];
+  
+  
 }

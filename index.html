@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LA TV Shows | Home</title>
+    <title>Adoptable Pets | Home</title>
     <meta name="description" content="A Catalog of Pets Needing New Families" />
     <link rel="stylesheet" href="style.css" />
     <script type="text/javascript" src="scripts.js" defer></script>
@@ -10,30 +10,30 @@
   <body>
     <header class="main-header">
       <h1 class="title">Find A New Pet Today!!</h1>
-    </header>
-    <div id ="button-group">
-      <button onclick="extractDataFromCSV();" id = "reset-button">All</button>
-      <button onclick="sortByAnimalType(document.getElementById('dog-button').value);" id = "dog-button" value = "DOG">Dog</button>  
-      <button onclick="sortByAnimalType(document.getElementById('cat-button').value);" id = "cat-button" value = "CAT">Cat</button>
-      <button onclick="sortByAnimalType(document.getElementById('bird-button').value);" id = "bird-button" value = "BIRD">Bird</button> 
-      <button onclick="sortByAnimalType(document.getElementById('other-button').value);" id = "other-button" value = "OTHER">Other</button>
-    </div>
-    <div id="card-container"></div>
-    <div class="card" style="display: none">
-      <div class="card-content">
-        <h2>TV Show Title</h2>
-        <img src  = "" alt="Pet Info Card" />
-        <ul>
-          <li></li>
-          <li></li>
-        </ul>
+    <div class="dropdown">
+      <button class="dropbtn">Filters</button>
+      <div class="dropdown-content">
+        <button class = "filter-button"onclick="extractDataFromCSV();" id = "reset-button">All</button>
+        <button class = "filter-button"onclick="sortByAnimalType(document.getElementById('dog-button').value);" id = "dog-button" value = "DOG">Dog</button>  
+        <button class = "filter-button"onclick="sortByAnimalType(document.getElementById('cat-button').value);" id = "cat-button" value = "CAT">Cat</button>
+        <button class = "filter-button"onclick="sortByAnimalType(document.getElementById('bird-button').value);" id = "bird-button" value = "BIRD">Bird</button> 
+        <button class = "filter-button"onclick="sortByAnimalType(document.getElementById('other-button').value);" id = "other-button" value = "OTHER">Misc. Animals</button>
+        <button class = "filter-button"onclick="sortByInDate();" id = "indate-button">In Date</button>
       </div>
     </div>
-    <!-- test -->
-    
-    <!--  -->
+    <div id="card-container"></div>
+      <div class="card" style="display: none">
+        <div class="card-content" >
+          <h2>TV Show Title</h2>
+          <img src  = "" alt="Pet Info Card"/>
+          <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+    </div>
     <div class="footer">
-      <!-- <button onclick="">Get A Quote!</button> -->
       <button onclick="removeLastCard();">Remove A Card!</button>
     </div>
   </body>

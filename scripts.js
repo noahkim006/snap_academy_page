@@ -39,32 +39,6 @@ let titles = [
 // Your final submission should have much more data than this, and
 // you should use more than just an array of strings to store it all.
 
-
-function showCards() {
-  const cardContainer = document.getElementById("card-container");
-  cardContainer.innerHTML = "";
-  const templateCard = document.querySelector(".card");
-
-  for (let i = 0; i < titles.length; i++) {
-    let title = titles[i];
-
-    // This part of the code doesn't scale very well! After you add your
-    // own data, you'll need to do something totally different here.
-    let imageURL = "";
-    if (i == 0) {
-      imageURL = FRESH_PRINCE_URL;
-    } else if (i == 1) {
-      imageURL = CURB_POSTER_URL;
-    } else if (i == 2) {
-      imageURL = EAST_LOS_HIGH_POSTER_URL;
-    }
-
-    const nextCard = templateCard.cloneNode(true); // Copy the template card
-    editCardContent(nextCard, title, imageURL); // Edit title and image
-    cardContainer.appendChild(nextCard); // Add new card to the container
-  }
-}
-
 function editCardContent(card, newTitle, newImageURL) {
   card.style.display = "block";
 
@@ -109,46 +83,57 @@ function removeLastCard() {
 //       maybe save data as a hash table for O(1) lookup time, but idk what to put as the key??
 const pets = [];
 
-function loadXMLData() {
-  fetch("pets.xml")
-    .then(response => response.text())
-    .then((xmlFile) => {
-
-      // Turn the XML into a DOM object - can work with info now :D
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(xmlFile, "applications/xml");
-
-      const xmlRowData = xmlDoc.getElementsByTagName("row");
-
-      for(let i = 0; i < xmlRowData.length; i++) {
-        let currentRow = xmlRowData[i];
-        let newPet = {
-          petName    : currentRow.getElementByTagName("petname")[0].textContent,
-          animalType : currentRow.getElementByTagname("animaltype")[0].textContent, 
-          petAge     : currentRow.getElementByTagName("petage")[0].textContent, 
-          petColor   : currentRow.getELementByTagName("color")[0].textContent, 
-          petBreed   : currentRow.getELementByTagName("breed")[0].textContent, 
-          petGender  : currentRow.getELementByTagName("sex")[0].textContent,      //maybe include a conditinal operator to just assign male or female since XML also stores whether or not the pet is spayed/neutered    
-          petPicture : currentRow.getELementByTagName("url")[0].getAttribute()
-        };
-        // will change this to a different data struct  
-        pets.push(newPet);
+function extractDataFromCSV() {
+  fetch("pets.csv")
+    .then(response => {
+      if(!response.ok) {
+        console.log("ERROR READING DATA FROM FILE");
+        throw new Error("Reading File Failed");
       }
-    }).catch((error) =>{
-      console.error("Could not load data")
+      return response.text();
     })
+    .then((csvFile) => {
+      const csvRows = csvFile.split('\n');
+      const csvHeaders = csvRows[0].split(',');
 
-    console.log(pets[1].petName);
+      //start at index 1 since first row of CSV is header values 
+      for(let i = 1; i < csvRows.length; i++) {
+        const petValues = csvRows[i].split(',');
+        const petObject = {};
+
+        for(let j = 0; j < petValues.length; j++) {
+          petObject[csvHeaders[j]] = petValues[j];
+        }
+        pets.push(petObject);
+      }
+    })
+    .catch(error => console.error("ERROR FETCHING FILE", error));
+
+    // to test file reading 
+    console.log(pets);
 }
 
 
+function showCards() {
+  // const cardContainer = document.getElementById("card-container");
+  // cardContainer.innerHTML = "";
+  // const templateCard = document.querySelector(".card");
 
-console.log(pets);
+  // for (let i = 0; i < titles.length; i++) {
+  //   let title = titles[i];
 
+  //   // This part of the code doesn't scale very well! After you add your
+  //   // own data, you'll need to do something totally different here.
+  //   let imageURL = "";
+  //   if (i == 0) {
+  //     imageURL = FRESH_PRINCE_URL;
+  //   } else if (i == 1) {
+  //     imageURL = CURB_POSTER_URL;
+  //   } else if (i == 2) {
+  //     imageURL = EAST_LOS_HIGH_POSTER_URL;
+  //   }
 
-
-
-
-
-// This function adds cards the page to display the data in the array
-
+  //   const nextCard = templateCard.cloneNode(true); // Copy the template card
+  //   editCardContent(nextCard, title, imageURL); // Edit title and image
+  //   cardContainer.appendChild(nextCard); // Add new card to the container
+  }

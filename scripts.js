@@ -23,15 +23,6 @@
  *
  */
 
-// This calls the addCards() function when the page is first loaded
-document.addEventListener("DOMContentLoaded", extractDataFromCSV);
-
-function quoteAlert() {
-  console.log("Button Clicked!");
-  alert(
-    "I guess I can kiss heaven goodbye, because it got to be a sin to look this good!"
-  );
-}
 
 //============================================================================================================
 //============================================================================================================
@@ -43,8 +34,22 @@ function quoteAlert() {
 // TODO: create a tree of pets for O(log(n)) search speed --  need to implement search bar & feature 
 //       maybe save data as a hash table for O(1) lookup time, but idk what to put as the key??
 const pets = [];
+//const petTypeOptions = new Set();
+
+const mapOfPets = new Map();
+
+function test() {
+  const reader = new FileReader();
+  reader.readAsText("pets.csv");
+
+  console.log(reader);
+}
+
+//extracts data from CSV as soon as page loaded
+document.addEventListener("DOMContentLoaded", extractDataFromCSV);
 
 function extractDataFromCSV() {
+
   fetch("pets.csv")
     .then(response => {
       if(!response.ok) {
@@ -66,9 +71,10 @@ function extractDataFromCSV() {
           petObject[csvHeaders[j]] = petValues[j]; // since header and petValues are parallel, can use one index to loop through both
         }
         pets.push(petObject);
+        //petTypeOptions.add(petObject.animalType);
       }
       //console.log(csvHeaders);  
-      showCards();
+      showCards(pets);
 
     })
     .catch(error => console.error("ERROR FETCHING FILE", error));
@@ -81,7 +87,7 @@ function editCardContent(card, petObject) {
 
   const cardHeader = card.querySelector("h2");
   //console.log(petObject.petName);
-  cardHeader.textContent = petObject.petName.replace("*", "");
+  cardHeader.textContent = petObject.petName.replace("*", "").replace(" ", ""); //get rid of unneccessary white spaces and asterisk that came with data in CSV
 
   const cardImage = card.querySelector("img");
   cardImage.src = petObject.petImage;
@@ -91,28 +97,46 @@ function editCardContent(card, petObject) {
   const cardListElements = cardUnorderedList.querySelectorAll("li");
 
   //console.log(petObject.petAge);
-  
+
   //hard coding this because easier than to loop through a list of 2 elements
   //change this to a loop if need more list elements inside the card, but realistically just have the card redirect to a page holding more information about the pet itself
   cardListElements[0].textContent = "Age: " + petObject.petAge;  
   cardListElements[1].textContent = "Breed: " + petObject.breed;
 }
 
-function showCards() {
+function showCards(petsList) {
 
+  //console.log(petTypeOptions);
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML =  "";
   const template = document.querySelector(".card");
 
-  for(let i = 0; i < pets.length; i++) {
-    let currentPet = pets[i];
+  for(let i = 0; i < petsList.length; i++) {
+    let currentPet = petsList[i];
 
     const card = template.cloneNode(true);
     editCardContent(card, currentPet);
     cardContainer.appendChild(card);
   }
 }
+
 function removeLastCard() {
+
   pets.pop();  //removes the last thing in the array
   showCards(); //reload page - updates UI
+}
+
+function sortByAnimalType(animalType) {
+  
+  //console.log(animalType);
+  const sortedPetsByType = [];
+  //console.log(pets);
+  for(let i = 0; i < pets.length; i++) {
+    let currentPet = pets[i];
+    if(currentPet.animalType == animalType) {
+      sortedPetsByType.push(currentPet);
+    }
+  }
+  //console.log(sortedPetsByType);
+  showCards(sortedPetsByType);
 }

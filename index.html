@@ -14,11 +14,12 @@
       <button class="dropbtn">Filters</button>
       <div class="dropdown-content">
         <button class = "filter-button"onclick="extractDataFromCSV();" id = "reset-button">All</button>
-        <button class = "filter-button"onclick="sortByAnimalType(document.getElementById('dog-button').value);" id = "dog-button" value = "DOG">Dog</button>  
-        <button class = "filter-button"onclick="sortByAnimalType(document.getElementById('cat-button').value);" id = "cat-button" value = "CAT">Cat</button>
-        <button class = "filter-button"onclick="sortByAnimalType(document.getElementById('bird-button').value);" id = "bird-button" value = "BIRD">Bird</button> 
-        <button class = "filter-button"onclick="sortByAnimalType(document.getElementById('other-button').value);" id = "other-button" value = "OTHER">Misc. Animals</button>
-        <button class = "filter-button"onclick="sortByInDate();" id = "indate-button">In Date</button>
+        <button class = "filter-button"onclick="sortByAnimalType(this.value);" id = "dog-button" value = "DOG">Dog</button>  
+        <button class = "filter-button"onclick="sortByAnimalType(this.value);" id = "cat-button" value = "CAT">Cat</button>
+        <button class = "filter-button"onclick="sortByAnimalType(this.value);" id = "bird-button" value = "BIRD">Bird</button> 
+        <button class = "filter-button"onclick="sortByAnimalType(this.value);" id = "other-button" value = "OTHER">Misc. Animals</button>
+        <button class = "filter-button"onclick="sortByInDate(this.value);" id = "indate-button" value = "mostRecentlyIn">Recently In</button>
+        <button class = "fillte-button"onclick="sortByInDate(this.value);" id = "oldest-in-button" value = "oldestIn">Oldest In</button>
       </div>
     </div>
     <div id="card-container"></div>

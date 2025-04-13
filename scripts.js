@@ -163,34 +163,50 @@ function loadMorePetInfo(petObject) {
 }
 
 // implement quickSort algorithm for sorting pets by in date 
-function sortByInDate() {
-  quickSort(pets, 0, pets.length - 1);
+function sortByInDate(filterOption) {
+  quickSort(pets, 0, pets.length - 1, filterOption);
   showCards(pets);
   
 }
 
-function quickSort(array, lowIndex, highIndex) {
+function quickSort(array, lowIndex, highIndex, filterOption) {
   if(lowIndex < highIndex) {
-    const partition = findPartition(array, lowIndex, highIndex);
+    const partition = findPartition(array, lowIndex, highIndex, filterOption);
 
-    quickSort(array, lowIndex, partition - 1);
-    quickSort(array, partition + 1, highIndex);
+    quickSort(array, lowIndex, partition - 1, filterOption);
+    quickSort(array, partition + 1, highIndex, filterOption);
   }
 }
 
-function findPartition(array, lowIndex, highIndex) {
+function findPartition(array, lowIndex, highIndex, filterOption) {
   const pivotCell = array[highIndex].timeSpent;
-
   let i = lowIndex - 1;
-  for(let j = lowIndex; j < highIndex; j++) {
-    if(array[j].timeSpent < pivotCell) {
-      i++
-      swapArrayElements(array, i, j);
-    }
+
+  //probably not the best way of implementation, but i could not think of another option besides defining an entirely differnt funciton for just one thing changed 
+  if(filterOption == "mostRecentlyIn") {
+    for(let j = lowIndex; j < highIndex; j++) {
+      //change the comparision operator for changing the order in which the pets are displayed by indate -- implement a bool function so the user can choose whcih on they sort by
+      if(array[j].timeSpent < pivotCell) { 
+        i++
+        swapArrayElements(array, i, j);
+      }
+    } 
+    swapArrayElements(array, i + 1, highIndex);
+    
+    return i + 1;
   } 
-  swapArrayElements(array, i + 1, highIndex);
-  
-  return i + 1;
+  else if (filterOption == "oldestIn") {
+    for(let j = lowIndex; j < highIndex; j++) {
+      //change the comparision operator for changing the order in which the pets are displayed by indate -- implement a bool function so the user can choose whcih on they sort by
+      if(array[j].timeSpent > pivotCell) { 
+        i++
+        swapArrayElements(array, i, j);
+      }
+    } 
+    swapArrayElements(array, i + 1, highIndex);
+    
+    return i + 1;
+  }
 }
 
 ///have to pass in the array since JS cant pass by reference unlike C++

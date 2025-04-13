@@ -36,12 +36,6 @@
 const pets = [];
 
 
-function test() {
-  const reader = new FileReader();
-  reader.readAsText("pets.csv");
-
-  console.log(reader);
-}
 
 //extracts data from CSV as soon as page loaded
 document.addEventListener("DOMContentLoaded", extractDataFromCSV);
@@ -68,6 +62,8 @@ function extractDataFromCSV() {
         for(let j = 0; j < petValues.length; j++) {
           petObject[csvHeaders[j]] = petValues[j]; // since header and petValues are parallel, can use one index to loop through both
         }
+        petObject["timeSpent"] = inDateToTimeSpent(petObject.inDate);
+        console.log(petObject);
         pets.push(petObject);
         //petTypeOptions.add(petObject.animalType);
       }
@@ -140,9 +136,42 @@ function sortByAnimalType(animalType) {
   showCards(sortedPetsByType);
 }
 
+
+//CHANGE THIS FUCNTION TO WORK WITH THE PARAMETER PASSED IN 
+function inDateToTimeSpent(inDateAsString) {
+  // console.log(pets[1].inDate);
+
+  //const inDateAsString = pets[2].inDate; 
+  const today = new Date();
+
+  // const day = String(today.getDate()).padStart(2, '0');
+  // const month = String(today.getMonth() + 1).padStart(2, '0'); // have to add one since month starts at 0 like an
+  // const year = today.getFullYear();
+  
+  const inDateValues = inDateAsString.split('/'); //inDate array is defined as [MONTH, DAY, YEAR]
+
+
+  //need to subtract month by one since monthIndex in the Date constructor starts at index 0 for January
+  //the monthIndex passed in through inDateValue does not account for this so need to manually do it 
+  const inDate = new Date(inDateValues[2], inDateValues[0] - 1, inDateValues[1]); 
+
+  // console.log(today);
+  // console.log(inDate);
+
+  // subtracting 2 Date objects returns the time difference in milliseconds, change into time difference in days for easier reference - can change this later if needed 
+  // console.log((today - inDate) / (1000 * 60 * 60 * 24)); 
+
+  const timeSpent = (today - inDate) / (1000 * 60 * 60 * 24);
+  return timeSpent;
+
+
+
+  // figure out how this function  is going to handle the time spent
+  // need to handle cases where certain months have more days than another and account animals that were dropped off in years that are not the current
+}
+
 function sortByInDate() {
 
   const sortedByInDate= [];
-  
   
 }

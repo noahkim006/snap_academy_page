@@ -33,9 +33,9 @@
 
 // TODO: create a tree of pets for O(log(n)) search speed --  need to implement search bar & feature 
 //       maybe save data as a hash table for O(1) lookup time, but idk what to put as the key??
+
+//I DONT THINK NEED MORE THAN A MAP SINCE CAN ASSOCIATE THE OBJECT WITH THE HTML ELEMENT
 const pets = [];
-
-
 
 //extracts data from CSV as soon as page loaded
 document.addEventListener("DOMContentLoaded", extractDataFromCSV);
@@ -63,11 +63,12 @@ function extractDataFromCSV() {
           petObject[csvHeaders[j]] = petValues[j]; // since header and petValues are parallel, can use one index to loop through both
         }
         petObject["timeSpent"] = inDateToTimeSpent(petObject.inDate);
-        console.log(petObject);
+
+        // console.log(petObject);
         pets.push(petObject);
-        //petTypeOptions.add(petObject.animalType);
       }
-      //console.log(csvHeaders);  
+
+      
       showCards(pets);
 
     })
@@ -79,9 +80,9 @@ function editCardContent(card, petObject) {
 
   card.style.display = "block";
 
-  card.value = petObject.petName;
+  card.value = petObject;
   const cardHeader = card.querySelector("h2");
-  //console.log(petObject.petName);
+
   cardHeader.textContent = petObject.petName.replace("*", "").replace(" ", ""); //get rid of unneccessary white spaces and asterisk that came with data in CSV
 
   const cardImage = card.querySelector("img");
@@ -90,8 +91,6 @@ function editCardContent(card, petObject) {
 
   const cardUnorderedList = card.querySelector("ul");
   const cardListElements = cardUnorderedList.querySelectorAll("li");
-
-  //console.log(petObject.petAge);
 
   //hard coding this because easier than to loop through a list of 2 elements
   //change this to a loop if need more list elements inside the card, but realistically just have the card redirect to a page holding more information about the pet itself
@@ -137,41 +136,67 @@ function sortByAnimalType(animalType) {
 }
 
 
-//CHANGE THIS FUCNTION TO WORK WITH THE PARAMETER PASSED IN 
 function inDateToTimeSpent(inDateAsString) {
-  // console.log(pets[1].inDate);
 
   //const inDateAsString = pets[2].inDate; 
   const today = new Date();
-
-  // const day = String(today.getDate()).padStart(2, '0');
-  // const month = String(today.getMonth() + 1).padStart(2, '0'); // have to add one since month starts at 0 like an
-  // const year = today.getFullYear();
   
   const inDateValues = inDateAsString.split('/'); //inDate array is defined as [MONTH, DAY, YEAR]
-
 
   //need to subtract month by one since monthIndex in the Date constructor starts at index 0 for January
   //the monthIndex passed in through inDateValue does not account for this so need to manually do it 
   const inDate = new Date(inDateValues[2], inDateValues[0] - 1, inDateValues[1]); 
 
-  // console.log(today);
-  // console.log(inDate);
-
   // subtracting 2 Date objects returns the time difference in milliseconds, change into time difference in days for easier reference - can change this later if needed 
-  // console.log((today - inDate) / (1000 * 60 * 60 * 24)); 
 
   const timeSpent = (today - inDate) / (1000 * 60 * 60 * 24);
   return timeSpent;
-
-
-
-  // figure out how this function  is going to handle the time spent
-  // need to handle cases where certain months have more days than another and account animals that were dropped off in years that are not the current
 }
 
-function sortByInDate() {
+function loadMorePetInfo(petObject) {
 
-  const sortedByInDate= [];
+  //THIS METHOD IS VERY BAD AND UNSAFE BUT I COULDNT THINK OF ANOTHER WAY WITHOUT USING API / NON VANILLA JS 
+  const div = document.createElement('div');
+  const detailedPetInfo = document.createElement('p')
+
+
+}
+
+// implement quickSort algorithm for sorting pets by in date 
+function sortByInDate() {
+  quickSort(pets, 0, pets.length - 1);
+  showCards(pets);
   
 }
+
+function quickSort(array, lowIndex, highIndex) {
+  if(lowIndex < highIndex) {
+    const partition = findPartition(array, lowIndex, highIndex);
+
+    quickSort(array, lowIndex, partition - 1);
+    quickSort(array, partition + 1, highIndex);
+  }
+}
+
+function findPartition(array, lowIndex, highIndex) {
+  const pivotCell = array[highIndex].timeSpent;
+
+  let i = lowIndex - 1;
+  for(let j = lowIndex; j < highIndex; j++) {
+    if(array[j].timeSpent < pivotCell) {
+      i++
+      swapArrayElements(array, i, j);
+    }
+  } 
+  swapArrayElements(array, i + 1, highIndex);
+  
+  return i + 1;
+}
+
+///have to pass in the array since JS cant pass by reference unlike C++
+function swapArrayElements(array, index1, index2) {
+  const temp = array[index1];
+  array[index1] = array[index2];
+  array[index2] = temp;
+}
+

@@ -18,6 +18,8 @@ body {
   color: white;
 }
 
+
+
 /* Style the card container to use Flexbox */
 #card-container {
   display: flex;
@@ -29,8 +31,8 @@ body {
 
 /* Style individual cards */
 .card {
-  flex: 1 1 calc(25% - 32px); /* Each card takes up 25% of the row minus spacing */
-  max-width: calc(25% - 32px); /* Ensure cards don't exceed 25% width */
+  flex: 1 1 calc(20% - 32px); /* Each card takes up 25% of the row minus spacing */
+  max-width: calc(20% - 32px); /* Ensure cards don't exceed 25% width */
   box-sizing: border-box; /* Include padding and border in width/height */
   background-color: #f9f9f9; /* Optional: Add a background color */
   border: 1px solid #ddd; /* Optional: Add a border */
@@ -128,3 +130,9 @@ button {
 .dropdown:hover .dropdown-content {display: block;}
 
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+
+/* .card a:
+.popup-info {
+  display: none;
+} */

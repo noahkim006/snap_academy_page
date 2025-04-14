@@ -69,7 +69,6 @@ function editCardContent(card, petObject) {
   const cardPetInfo = card.querySelector("p");
   
   cardPetInfo.textContent = petObject.animalID;
-
 }
 
 function showCards(petsList) {
@@ -160,6 +159,7 @@ function inDateToTimeSpent(inDateAsString) {
 
 // implement quickSort algorithm for sorting pets by in date 
 function sortByInDate(filterOption) {
+
   let petCopy = pets.slice(0); //without creating a copy, the sort would work on the original dataset, changing how ALL filter works after it the sort is run
   quickSort(petCopy, 0, pets.length - 1, filterOption);
   showCards(petCopy);
@@ -167,6 +167,7 @@ function sortByInDate(filterOption) {
 }
 
 function quickSort(array, lowIndex, highIndex, filterOption) {
+
   if(lowIndex < highIndex) {
     const partition = findPartition(array, lowIndex, highIndex, filterOption);
 
@@ -176,6 +177,7 @@ function quickSort(array, lowIndex, highIndex, filterOption) {
 }
 
 function findPartition(array, lowIndex, highIndex, filterOption) {
+
   const pivotCell = array[highIndex].timeSpent;
   let i = lowIndex - 1;
 
@@ -203,7 +205,7 @@ function findPartition(array, lowIndex, highIndex, filterOption) {
     swapArrayElements(array, i + 1, highIndex);
     
     return i + 1;
-
+    
   }
 }
 

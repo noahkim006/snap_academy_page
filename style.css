@@ -120,6 +120,11 @@ button:hover {
 }
 
 /* Dropdown styling */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
 .dropbtn {
   background-color: #04aa6d;
   color: white;
@@ -133,11 +138,6 @@ button:hover {
 
 .dropbtn:hover {
   background-color: #028a57;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
 }
 
 .dropdown-content {
@@ -260,4 +260,23 @@ li {
   text-align: center;
   font-weight: 700;
   font-size: 15px;
+}
+
+/* Container for search and filter */
+.search-filter-container {
+  display: flex; /* Align items horizontally */
+  justify-content: flex-end; /* Align to the right */
+  align-items: center; /* Vertically center the items */
+  gap: 10px; /* Add spacing between the search bar and filter dropdown */
+  padding: 10px 70px; /* Add padding for spacing */
+}
+
+/* Search bar styling */
+.search-bar {
+  width: 200px; /* Set a fixed width */
+  padding: 8px; /* Add padding for better appearance */
+  font-size: 16px; /* Adjust font size for readability */
+  border: 1px solid #ddd; /* Add a subtle border */
+  border-radius: 5px; /* Add rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
 }

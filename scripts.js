@@ -4,11 +4,22 @@ const pets = [];
 //extracts data from CSV as soon as page loaded
 document.addEventListener("DOMContentLoaded", extractDataFromCSV);
 
+const popupContainer = document.getElementById("pet-popup-container");
+
+
+//if popupContainer is present and click anywhere NOT in the popup, clear it from the screen
+window.onclick = function(e) {
+  if(e.target == popupContainer) {
+    popupContainer.style.display = "none";
+  }
+}
+
 function resetCards() {
   showCards(pets);
 }
 
 function extractDataFromCSV() {
+
   fetch("pets.csv")
     .then(response => {
       if(!response.ok) {
@@ -94,7 +105,24 @@ function loadMorePetInfo(petObject) {
 
   popupContentListElement[0].textContent = "Name: " + petObject.petName.replace("*", "");
   popupContentListElement[1].textContent = "Age: " + petObject.petAge;
-  popupContentListElement[2].textContent = "Time Spent In Shelter: " + Math.trunc(petObject.timeSpent) + " days";
+  popupContentListElement[2].textContent = "Breed: " + petObject.breed;
+  popupContentListElement[3].textContent = "Time Spent In Shelter: " + Math.trunc(petObject.timeSpent) + " days";
+
+  let genderString;
+  //find if there is a better way to do this, prob can use conditional operator when initally loading CSV data 
+  if(petObject.petGender === "M") {
+    genderString = "Male (Not Neutered)";
+  } else if (petObject.petGender === "F") {
+    genderString = "Female (Not Spayed)";
+  } else if (petObject.petGender === "N") {
+    genderString = "Male (Neutered)";
+  } else if (petObject.petGender === "S") {
+    genderString = "Female (Spayed)";
+  } else {
+    genderString = "Unknown";
+  }
+
+  popupContentListElement[4].textContent = "Gender: " + genderString;
 
   popupContainer.style.display = "block";
 
@@ -103,7 +131,12 @@ function loadMorePetInfo(petObject) {
   //     document.getElementById('pet-popup-container').style.display = 'none';
   //   }
   // })
+
+  // document.addEventListener('click', (e)=> {
+  //   document.getElementById('pet-popup-container').style.display = 'none';
+  // })
 }
+
 
 function removeLastCard() {
 

@@ -4,17 +4,18 @@ const pets = [];
 //extracts data from CSV as soon as page loaded
 document.addEventListener("DOMContentLoaded", extractDataFromCSV);
 
-const popupContainer = document.getElementById("pet-popup-container");
-
-
 //if popupContainer is present and click anywhere NOT in the popup, clear it from the screen
+const popupContainer = document.getElementById("pet-popup-container");
 window.onclick = function(e) {
+
   if(e.target == popupContainer) {
     popupContainer.style.display = "none";
   }
 }
 
+//reload all cards using original array, which should  be unaffected the entire time
 function resetCards() {
+
   showCards(pets);
 }
 
@@ -64,17 +65,10 @@ function editCardContent(card, petObject) {
   const cardImage = card.querySelector("img");
   cardImage.src = petObject.petImage;
   cardImage.alt = "Picture of " + petObject.petName + " the " + petObject.animalType;
-
-  const cardUnorderedList = card.querySelector("ul");
-  const cardListElements = cardUnorderedList.querySelectorAll("li");
-
-  //hard coding this because easier than to loop through a list of 2 elements
-  //change this to a loop if need more list elements inside the card, but realistically just have the card redirect to a page holding more information about the pet itself
-  // cardListElements[0].textContent = "Age: " + petObject.petAge;  
-  // cardListElements[1].textContent = "Breed: " + petObject.breed;
-  // cardListElements[2].textContent = "In Date: " + petObject.inDate;
-
-  cardListElements[0].textContent = petObject.animalID;
+  
+  const cardPetInfo = card.querySelector("p");
+  
+  cardPetInfo.textContent = petObject.animalID;
 
 }
 
@@ -125,16 +119,6 @@ function loadMorePetInfo(petObject) {
   popupContentListElement[4].textContent = "Gender: " + genderString;
 
   popupContainer.style.display = "block";
-
-  // document.addEventListener('click', (e) => {
-  //   if(!e.target.closest('.pet-popup-container')) {
-  //     document.getElementById('pet-popup-container').style.display = 'none';
-  //   }
-  // })
-
-  // document.addEventListener('click', (e)=> {
-  //   document.getElementById('pet-popup-container').style.display = 'none';
-  // })
 }
 
 

@@ -255,3 +255,9 @@ li {
 .popup-content span:hover {
   color: #000;
 }
+
+#card-container p {
+  text-align: center;
+  font-weight: 700;
+  font-size: 15px;
+}

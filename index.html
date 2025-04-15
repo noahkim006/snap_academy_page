@@ -13,7 +13,9 @@
 
 
     <div class = "search-filter-container">
-      <input class = "search-bar" type = "text" placeholder = "Search...">
+      <!-- function inside this is not highlighted as a function but still works anyways ????? -->
+      <input type = "search" class = "search-bar"  placeholder = "Search By Name..." onsearch="findSearchValue(this.value);">
+
     <div class="dropdown">
       <button class="dropbtn">Filters</button>
       <div class="dropdown-content">

@@ -157,6 +157,26 @@ function inDateToTimeSpent(inDateAsString) {
   return timeSpent;
 }
 
+function findSearchValue(value) {
+
+  //if the inputted value is empty just show original data set 
+  if(!value.length) {
+    showCards(pets);
+    return;
+  }
+  //use trim and replace to get rid of any white spaces and asterisk in og and inputted names - make them me same case
+  const inputtedName = value.toUpperCase().trim().replace(" ", "");
+  let searchedValArray = [];
+  for(let i = 0; i < pets.length; i++) {
+    if(pets[i].petName.replace("*", "").replace(" ", "") == inputtedName) {
+      searchedValArray.push(pets[i]);
+    }
+    console.log(inputtedName);
+    console.log(pets[i].petName);
+  }
+  showCards(searchedValArray);
+}
+
 // implement quickSort algorithm for sorting pets by in date 
 function sortByInDate(filterOption) {
 

@@ -194,7 +194,7 @@ li {
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
+  overflow: auto;
   background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
 }
 
@@ -279,4 +279,14 @@ li {
   border: 1px solid #ddd; /* Add a subtle border */
   border-radius: 5px; /* Add rounded corners */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+.site-header {
+  margin: 0;
+  font-family: "Nunito", sans-serif; /* Example using a Google Font (add link in HTML) */
+  font-size: 40px;
+  /* Fallback font */
+  /* font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; */
+  line-height: 1.6;
 }

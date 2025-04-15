@@ -9,8 +9,10 @@
 
   <body>
     <header class="main-header">
-      <h1 class="title">Find A New Pet Today!!</h1>
-
+      <div class="container header-container">
+        <div class="logo">
+          <header class="site-header"href="/">title</header>
+        </div>
 
     <div class = "search-filter-container">
       <!-- function inside this is not highlighted as a function but still works anyways ????? -->
@@ -19,13 +21,15 @@
     <div class="dropdown">
       <button class="dropbtn">Filters</button>
       <div class="dropdown-content">
-        <button class = "filter-button"onclick="resetCards();" id = "reset-button">All</button>
-        <button class = "filter-button"onclick="sortByAnimalType(this.value);" id = "dog-button" value = "DOG">Dog</button>  
-        <button class = "filter-button"onclick="sortByAnimalType(this.value);" id = "cat-button" value = "CAT">Cat</button>
-        <button class = "filter-button"onclick="sortByAnimalType(this.value);" id = "bird-button" value = "BIRD">Bird</button> 
-        <button class = "filter-button"onclick="sortByAnimalType(this.value);" id = "other-button" value = "OTHER">Misc. Animals</button>
-        <button class = "filter-button"onclick="sortByInDate(this.value);" id = "indate-button" value = "mostRecentlyIn">Recently In</button>
-        <button class = "filter-button"onclick="sortByInDate(this.value);" id = "oldest-in-button" value = "oldestIn">Oldest In</button>
+        <button class = "filter-button" onclick="resetCards();" id = "reset-button">All</button>
+        <button class = "filter-button" onclick="sortByAnimalType(this.value);" id = "dog-button" value = "DOG">Dog</button>  
+        <button class = "filter-button" onclick="sortByAnimalType(this.value);" id = "cat-button" value = "CAT">Cat</button>
+        <button class = "filter-button" onclick="sortByAnimalType(this.value);" id = "bird-button" value = "BIRD">Bird</button> 
+        <button class = "filter-button" onclick="sortByAnimalType(this.value);" id = "other-button" value = "OTHER">Misc. Animals</button>
+        <button class = "filter-button" onclick="sortByInDate(this.value);" id = "indate-button" value = "mostRecentlyIn">Recently In</button>
+        <button class = "filter-button" onclick="sortByInDate(this.value);" id = "oldest-in-button" value = "oldestIn">Oldest In</button>
+        <button class = "filter-button" onclick="filterByGender(this.value);" id = "male-filter-button" value = "MALE">Male</button>
+        <button class = "filter-button" onclick="filterByGender(this.value);" id = "female-filter-button" value = "FEMALE">Female</button>
       </div>
     </div>
     </div>

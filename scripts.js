@@ -1,4 +1,3 @@
-//I DONT THINK NEED MORE THAN A MAP SINCE CAN ASSOCIATE THE OBJECT WITH THE HTML ELEMENT
 const pets = [];
 
 //extracts data from CSV as soon as page loaded
@@ -13,7 +12,7 @@ window.onclick = function(e) {
   }
 }
 
-//reload all cards using original array, which should  be unaffected the entire time
+//reload all cards using original array, which should be unaffected the entire time
 function resetCards() {
 
   showCards(pets);
@@ -64,8 +63,8 @@ function editCardContent(card, petObject) {
 
   const cardImage = card.querySelector("img");
   cardImage.src = petObject.petImage;
-  cardImage.alt = "Picture of " + petObject.petName + " the " + petObject.animalType;
-  
+  cardImage.alt = "Picture of " + petObject.petName;
+ 
   const cardPetInfo = card.querySelector("p");
   
   cardPetInfo.textContent = petObject.animalID;
@@ -167,14 +166,58 @@ function findSearchValue(value) {
   //use trim and replace to get rid of any white spaces and asterisk in og and inputted names - make them me same case
   const inputtedName = value.toUpperCase().trim().replace(" ", "");
   let searchedValArray = [];
+
   for(let i = 0; i < pets.length; i++) {
     if(pets[i].petName.replace("*", "").replace(" ", "") == inputtedName) {
       searchedValArray.push(pets[i]);
     }
-    console.log(inputtedName);
-    console.log(pets[i].petName);
+    // console.log(inputtedName);
+    // console.log(pets[i].petName);
   }
-  showCards(searchedValArray);
+
+  //if no matches were found, alert user and dont do anything
+  if(searchedValArray.length != 0) {
+    showCards(searchedValArray);
+    return;
+  }
+
+  alert("No pets with the name: " + inputtedName + " was found.");
+
+}
+
+function filterByGender(filterOption) {
+  let filteredByMale = [] ;
+  let filteredByFemale = [];
+  
+  for(let i = 0; i < pets.length; i++) {
+    const currentPet = pets[i];
+    if(currentPet.petGender == "M" || currentPet.petGender == "N") {
+      filteredByMale.push(currentPet);
+    } else if (currentPet.petGender == "F" || currentPet.petGender == "S") {
+      filteredByFemale.push(currentPet);
+    }
+  }
+
+  if(filterOption == "MALE") {
+    // console.log(filteredByMale);
+    showCards(filteredByMale);
+  } else if (filterOption == "FEMALE") {
+    // console.log(filteredByFemale);
+    showCards(filteredByFemale);
+  }
+
+
+
+
+
+
+    // if(filterOption = "MALE") {
+    //   for(let i = 0; i < pets.length; i++) {
+    //     if(pets[i].petGender == "M" || pets[i].petGender == "N") {
+    //       filtered.push(pets[i]);
+    //     }
+    //   }
+    // }
 }
 
 // implement quickSort algorithm for sorting pets by in date 
@@ -232,6 +275,7 @@ function findPartition(array, lowIndex, highIndex, filterOption) {
 ///have to pass in the array since JS cant pass values by reference unlike C++
 //objects like arrays are passed by ref. so can edit the array param which makes changes to the original data set
 function swapArrayElements(array, index1, index2) {
+
   const temp = array[index1];
   array[index1] = array[index2];
   array[index2] = temp;

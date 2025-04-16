@@ -1,4 +1,6 @@
 const pets = [];
+
+//implemented using a map over an array because I had a different idea in mind, but too late to change
 const listOfFavPets = new Map();
 
 //extracts data from CSV as soon as page loaded
@@ -60,7 +62,7 @@ function editCardContent(card, petObject) {
 
   const cardImage = card.querySelector("img");
   cardImage.src = petObject.petImage;
-  cardImage.alt = "Picture of " + petObject.petName;
+  cardImage.alt = ("Picture of " + petObject.petName);
 
   const cardPetInfo = card.querySelector("p");
 
@@ -90,12 +92,10 @@ function loadMorePetInfo(petObject) {
   const popupContainerImg = popupContainer.querySelector("img");
   popupContainerImg.src = petObject.petImage;
 
-  popupContentListElement[0].textContent =
-    "Name: " + petObject.petName.replace("*", "");
-  popupContentListElement[1].textContent = "Age: " + petObject.petAge;
-  popupContentListElement[2].textContent = "Breed: " + petObject.breed;
-  popupContentListElement[3].textContent =
-    "Time Spent In Shelter: " + Math.trunc(petObject.timeSpent) + " days";
+  popupContentListElement[0].textContent = ("Name: " + petObject.petName.replace("*", ""));
+  popupContentListElement[1].textContent = ("Age: " + petObject.petAge);
+  popupContentListElement[2].textContent = ("Breed: " + petObject.breed);
+  popupContentListElement[3].textContent = ("Time Spent In Shelter: " + Math.trunc(petObject.timeSpent) + " days");
 
   let genderString;
   //find if there is a better way to do this, prob can use conditional operator when initally loading CSV data
@@ -111,7 +111,7 @@ function loadMorePetInfo(petObject) {
     genderString = "Unknown";
   }
 
-  popupContentListElement[4].textContent = "Gender: " + genderString;
+  popupContentListElement[4].textContent = ("Gender: " + genderString);
 
   popupContainer.style.display = "block";
 }

@@ -13,7 +13,7 @@
     <header class="main-header">
       <div class="container header-container">
         <div class="logo">
-          <header class="site-header"href="/">title</header>
+          <header class="site-header"href="/" style = "font-family: serif;">Find A Pet</header>
         </div>
 
     <div class = "search-filter-container">
@@ -44,9 +44,6 @@
 
     
     <div class="popup-container" id="pet-popup-container">
-      <!-- <header class="popup-header">
-        <span onclick="document.getElementById('pet-popup-container').style.display='none';">X</span>
-      </header> -->
       <div class="popup-content">
         <header class = "popup-header">
           <span onclick ="document.getElementById('pet-popup-container').style.display = 'none';">X</span>
@@ -79,14 +76,11 @@
         </button>
       </div>
 
-      <div class="favorite-info-card">
+      <div class="favorite-info-card" style = "display: none;">
         <div class="fav-card-content" onclick = "loadMorePetInfo(this.value);" value = "">
           <img id = "fav-img" src = "" alt = "Image Not Loaded"/>
           <p id = "fav-name"></p>
         </div>
       </div>
-    <!-- <div class="footer"> -->
-      <!-- <button onclick="removeLastCard();">Remove A Card!</button> -->
-    <!-- </div> -->
   </body>
 </html>

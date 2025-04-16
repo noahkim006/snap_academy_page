@@ -4,7 +4,9 @@
     <title>Adoptable Pets | Home</title>
     <meta name="description" content="A Catalog of Pets Needing New Families" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script type="text/javascript" src="scripts.js" defer></script>
+
   </head>
 
   <body>
@@ -15,6 +17,11 @@
         </div>
 
     <div class = "search-filter-container">
+      <div id = "favorites-button-container" style = "display: block;">
+        <button id = "favorites-button" onclick = "showDropdownMenu();">See Favorites</button>
+        <div id = "favorites-dropdown-menu">
+        </div>
+      </div>
       <!-- function inside this is not highlighted as a function but still works anyways ????? -->
       <input type = "search" class = "search-bar"  placeholder = "Search By Name..." onsearch="findSearchValue(this.value);">
 
@@ -57,16 +64,27 @@
       </div>
     </div>
     <!-- empty to house the dynamically created cards in JS -->
-    <div id="card-container"></div>
-
-      <div class="card" style="display: none" value = "" onclick = "loadMorePetInfo(this.value);" >
-        <div class="card-content" >
-          <h2>TV Show Title</h2>
-          <img src  = "" alt="Pet Info Card"/>
-        
-          <p class = "pet-information"></p>
+    <div id="card-container">
+      
+    </div> 
+      <div class="card" style="display: none" value="" onclick="loadMorePetInfo(this.value);">
+        <div class="card-content">
+          <h2>Pet Name</h2>
+          <img src="" alt="Pet Info Card" />
+          <p class="pet-information" style = "font-size: 20px;"></p>
         </div>
-    </div>
+        <!-- pass in the value of the card into the function - pass the event to cancel the popup window event -->
+        <button class="card-button" onclick="favoritePet(event, this.closest('.card').value, this.style);">
+          <i class="material-icons">favorite</i>
+        </button>
+      </div>
+
+      <div class="favorite-info-card">
+        <div class="fav-card-content" onclick = "loadMorePetInfo(this.value);" value = "">
+          <img id = "fav-img" src = "" alt = "Image Not Loaded"/>
+          <p id = "fav-name"></p>
+        </div>
+      </div>
     <!-- <div class="footer"> -->
       <!-- <button onclick="removeLastCard();">Remove A Card!</button> -->
     <!-- </div> -->
